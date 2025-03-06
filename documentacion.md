@@ -184,13 +184,12 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
 4. Informacion de contacto clientes
 
    1. client_id
-   2. address
-   3. phone
-   4. email
-   5. active (true / false)
-   6. confirmed_email (true / false)
-   7. created_at
-   8. updated_at
+   2. phone
+   3. email
+   4. active (true / false)
+   5. confirmed_email (true / false)
+   6. created_at
+   7. updated_at
 
 5. Metodos de pago cliente (relacionada con la tabla de Clientes)
 
@@ -232,20 +231,20 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
 9. ordenes_entregadas
    1. id
    2. order_id
-   3. company_deliver_id
-   4. address
-   5. number_company_guide
-   6. status (delivered, failed, comming)
-   7. delivered_at
-   8. created_at
-   9. updated_at
+   3. address
+   4. number_company_guide
+   5. status (delivered, failed, comming)
+   6. delivered_at
+   7. created_at
+   8. updated_at
 10. empresas_envio (relacionada con ordenes_entregadas)
 
     1. id
     2. company_deliver_id
     3. name_company
-    4. created_at
-    5. updated_at
+    4. order_id
+    5. created_at
+    6. updated_at
 
 11. productos
 
@@ -288,8 +287,8 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
 
     1. id
     2. order_id
-    3. payment_method (credit card, bank transfer, electronic wallet)
-    4. status (paid, pending, failed)
+    3. status (paid, pending, failed)
+    4. id_type_payment_method
     5. created_at
     6. updated_at
     7. total_amount
@@ -298,9 +297,8 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
 
     1. id
     2. client_id
-    3. payment_method
-    4. created_at
-    5. updated_at
+    3. created_at
+    4. updated_at
 
 17. Metodos de pagos
 
@@ -331,7 +329,7 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
     6. updated_at
     7. active (true / false)
 
-20. File sedes
+20. sedes
 
     1. id
     2. name
@@ -351,3 +349,36 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
     3. address
     4. created_at
     5. updated_at
+
+## Diagrama matricial
+
+|                 Tablas                  |   ordenes    | ordenes_productos |  clientes   | informacion de contacto clientes | metodos de pago clientes | movimientos | movimientos_productos | productos_devolucion | ordenes_entregadas | empresas_envio |  productos   |  imagenes   | inventario | departamentos | pagos_ordenes |    pagos    | metodos de pago |  trabajadores  | Informacion de contacto de trabajadores |   sedes   | categorias  | direcciones  |
+| :-------------------------------------: | :----------: | :---------------: | :---------: | :------------------------------: | :----------------------: | :---------: | :-------------------: | :------------------: | :----------------: | :------------: | :----------: | :---------: | :--------: | :-----------: | :-----------: | :---------: | :-------------: | :------------: | :-------------------------------------: | :-------: | :---------: | :----------: |
+|                 ordenes                 |      -       |   tiene - 1:\*    | tiene - 1:1 |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|            ordenes_productos            |     son      |         -         |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    | tiene - 1:1  |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|                clientes                 | tiene - 1:\* |     No aplica     |      -      |           tiene - 1:1            |       tiene - 1:\*       |  No aplica  |       No aplica       |     tiene - 1:\*     |    tiene - 1:\*    |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |  tiene - 1:1  |  No aplica  |  tiene - 1:\*   |   No aplica    |                No aplica                | No aplica |  No aplica  | tiene - 1:\* |
+|    informacion de contacto clientes     |  No aplica   |     No aplica     |     son     |                -                 |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|        metodos de pago clientes         |  No aplica   |     No aplica     |     son     |            No aplica             |            -             |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|               movimientos               |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |      -      |     tiene - 1:\*      |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|          movimientos_productos          |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |     son     |           -           |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|          productos_devolucion           | tiene - 1:\* |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |          -           |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|           ordenes_entregadas            |     son      |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |         -          |   tiene 1:1    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|             empresas_envio              |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |        son         |       -        |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|                productos                |  No aplica   |        son        |  No aplica  |            No aplica             |        No aplica         |  No aplica  |          son          |      No aplica       |     No aplica      |   No aplica    |      -       | tiene - 1:1 | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica | tiene - 1:1 |  No aplica   |
+|                imagenes                 |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |     son      |      -      | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|               inventario                |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    | tiene - 1:\* |  No aplica  |     -      |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|              departamentos              |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |       -       |   No aplica   |  No aplica  |    No aplica    | responsable de |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|              pagos_ordenes              | tiene - 1:1  |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |       -       | tiene - 1:1 |   tiene - 1:1   |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|                  pagos                  |  No aplica   |     No aplica     | tiene - 1:1 |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |      son      |      -      |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|             metodos de pago             |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |        -        |   No aplica    |                No aplica                | No aplica |  No aplica  |  No aplica   |
+|              trabajadores               |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |  trabaja en   |   No aplica   |  No aplica  |    No aplica    |       -        |               tiene - 1:1               | No aplica |  No aplica  |  No aplica   |
+| Informacion de contacto de trabajadores |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |      son       |                    -                    | No aplica |  No aplica  |  No aplica   |
+|                  sedes                  |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  |   tiene    |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                |     -     |  No aplica  |  No aplica   |
+|               categorias                |  No aplica   |     No aplica     |  No aplica  |            No aplica             |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |   estan en   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |      -      |  No aplica   |
+|               direcciones               |  No aplica   |     No aplica     |  No aplica  |           forma parte            |        No aplica         |  No aplica  |       No aplica       |      No aplica       |     No aplica      |   No aplica    |  No aplica   |  No aplica  | No aplica  |   No aplica   |   No aplica   |  No aplica  |    No aplica    |   No aplica    |                No aplica                | No aplica |  No aplica  |      -       |
+
+## Modelo conceptual
+
+## Modelo logico
+
+## Modelo fisico
