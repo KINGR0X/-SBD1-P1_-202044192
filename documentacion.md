@@ -150,3 +150,204 @@ A continuación se desglosan los datos de las tablas segun los datos proporciona
     5. updated_at
 
 ## Normalizacion
+
+Campos que deben de tener las tablas par cumplir con las tres formas de normalizacion
+
+1. ordenes
+
+   1. id
+   2. cliente_id
+   3. location_id
+   4. created_at
+   5. updated_at
+
+2. ordenes_productos (relacionado con la tabla de ordenes)
+
+   1. id
+   2. order_id
+   3. product_id
+   4. quantity
+   5. price
+   6. created_at
+   7. updated_at
+
+3. clientes
+
+   1. id
+   2. national_document
+   3. name
+   4. lastname
+   5. password
+   6. created_at
+   7. updated_at
+
+4. Informacion de contacto clientes
+
+   1. client_id
+   2. address
+   3. phone
+   4. email
+   5. active (true / false)
+   6. confirmed_email (true / false)
+   7. created_at
+   8. updated_at
+
+5. Metodos de pago cliente (relacionada con la tabla de Clientes)
+
+   1. client_id
+   2. id_type_payment_method
+   3. created_at
+   4. updated_at
+
+6. movimientos
+
+   1. id
+   2. location_origin_id
+   3. location_dest_id
+   4. status (approved, pending, rejected, REQUESTED)
+   5. estimate_arrive_date
+   6. requested_at
+   7. created_at
+   8. updated_at
+
+7. movimientos_productos (relacionada con la tabla de movimientos)
+
+   1. id
+   2. movement_id
+   3. product_id
+   4. quantity
+   5. created_at
+   6. updated_at
+
+8. productos_devolucion
+
+   1. id
+   2. description
+   3. status (pending, requested, approved, rejected)
+   4. requested_at
+   5. created_at
+   6. updated_at
+   7. order_id
+
+9. ordenes_entregadas
+   1. id
+   2. order_id
+   3. company_deliver_id
+   4. address
+   5. number_company_guide
+   6. status (delivered, failed, comming)
+   7. delivered_at
+   8. created_at
+   9. updated_at
+10. empresas_envio (relacionada con ordenes_entregadas)
+
+    1. id
+    2. company_deliver_id
+    3. name_company
+    4. created_at
+    5. updated_at
+
+11. productos
+
+    1. id
+    2. sku (code of letters and numbers)
+    3. name
+    4. description
+    5. price
+    6. slug (letters)
+    7. category_id
+    8. active (true/ false)
+    9. created_at
+    10. updated_at
+
+12. imagenes (relacionado con la tabla de productos)
+
+    1. id
+    2. product_id
+    3. image (link)
+    4. created_at
+    5. updated_at
+
+13. inventario (relacionado con la tabla de productos)
+
+    1. id
+    2. product_id
+    3. location_id
+    4. quantity
+    5. created_at
+    6. updated_at
+
+14. departamentos
+
+    1. id
+    2. name
+    3. created_at
+    4. updated_at (transaction date)
+
+15. pagos_ordenes
+
+    1. id
+    2. order_id
+    3. payment_method (credit card, bank transfer, electronic wallet)
+    4. status (paid, pending, failed)
+    5. created_at
+    6. updated_at
+    7. total_amount
+
+16. pagos (relacionada con la tabla de pagos_ordenes)
+
+    1. id
+    2. client_id
+    3. payment_method
+    4. created_at
+    5. updated_at
+
+17. Metodos de pagos
+
+    1. id
+    2. id_type_payment_method
+    3. payment_method
+    4. created_at
+    5. updated_at
+
+18. trabajadores
+
+    1. id
+    2. national_document
+    3. name
+    4. lastname
+    5. job
+    6. department_id
+    7. created_at
+    8. updated_at
+
+19. Informacion de contacto de trabajadores
+
+    1. employee_id
+    2. phone
+    3. email
+    4. location_id
+    5. created_at
+    6. updated_at
+    7. active (true / false)
+
+20. File sedes
+
+    1. id
+    2. name
+    3. created_at
+    4. updated_at
+
+21. categorias
+
+    1. id
+    2. name
+    3. created_at
+    4. updated_at
+
+22. direcciones
+    1. id
+    2. client_id
+    3. address
+    4. created_at
+    5. updated_at
