@@ -379,6 +379,8 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
 
 ## Modelo conceptual
 
+![alt text](imgs/conceptual.png)
+
 ## Modelo logico
 
 ## Modelo fisico
