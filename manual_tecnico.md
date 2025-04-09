@@ -382,3 +382,93 @@ Campos que deben de tener las tablas par cumplir con las tres formas de normaliz
 ## Modelo Relacional
 
 [text](imgs/Relational_1.pdf)
+
+## Descripcion de la API
+
+La api es creada utilizando fastapi, para poder ejecutar la api en Linux se recomienda utilizar un entorno virtual, e instalar las dependencias indicadas en el archivo requirements.txt. Los comandos para correr la api son los siguientes:
+
+```cmd
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+uvicorn api:app --reload
+```
+
+Para la Api se utiliza encriptacion para las contraseñas, para asi brindar un poco más de seguridad. Se utiliza basemodel para la validacion de datos.
+
+Se utilizan diferentes endpoints para asi interactuar con la base de datos de Oracle.
+
+nota: Para crear el contenedor de oracle se usa el siguiente comando:
+
+```docker
+docker run -d --name oracle-xe -p 1521:1521 -p 5500:5500 -e ORACLE_PASSWORD=bases1 gvenzl/oracle-xe
+```
+
+## Descripcion de los endpoint utilizados
+
+### Crear Usuario (/api/users)
+
+Crea un nuevo usuario en la base de datos, especificamente en la tabla clientes y en la tabla informacion_contacto_clientes
+
+### Inicar sesion (/api/users/login)
+
+Autentica un inicio de sesion con la contraseña proporcionada y el hash almacenado
+
+### Obtener información de un usuario (/api/users/:id)
+
+Obtiene la informacion de un cliente en especifico segun la id de la ruta
+
+### Actualizar usuario (/api/users/:id)
+
+Modifica los datos de un cliente, excepto la contraseña
+
+### Eliminar Usuario (/api/users/:id)
+
+Elimina un cliente de la base de datos y su información almacenada.
+
+### Listar Productos (/api/products)
+
+Devuelve la lista de todos los productos que se encuentran registrados en la base de datos.
+
+### Detalle de Producto (/api/products/:id)
+
+Devuelve la información de un producto en especifico segun la id de la ruta
+
+### Crear Producto (/api//products)
+
+Se crea un nuevo producto en la base de datos
+
+### Actualizar Producto (/api/products/:id)
+
+Actualiza los datos de un producto en especifico segun la id de la ruta
+
+### Eliminar Product (/api//products/:id)
+
+Elimina un producto de la base de datos
+
+### Crear orden de Compra (/api/orders)
+
+Crea una orden, al crear una orden se actualizan las tablas de ordenes, ordenes_productos, pagos_ordenes, inventario. Y se obtiene y realizan validaciones de los datos del cliente y del producto.
+
+### Listar ordenes (/api/orders)
+
+Devuelve la lista de todas las ordenes que se encuentran registradas en la base de datos.
+
+### Detalle de orden (/api/orders/:id)
+
+Devuelve la información de una orden en especifico segun la id de la ruta
+
+### Actualizar Estado de orden (/api/orders/:id)
+
+Actualiza el estado de una orden en especifico segun la id de la ruta
+
+### Registrar Pago (/api/payments)
+
+Registra un pago en la base de datos, se actualiza la tabla de pagos y la tabla de pagos_ordenes
+
+### Consultar Pagos (/api/payments)
+
+Devuelve la lista de todos los pagos que se encuentran registrados en la base de datos.
